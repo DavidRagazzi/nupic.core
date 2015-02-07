@@ -10,7 +10,7 @@ version: 1.0.{build}
 branches:
   # whitelist
   only:
-    - 103-windows-build
+    - 275-windows-build
 
   # blacklist
   except:
