@@ -441,7 +441,7 @@ set_target_properties(${EXECUTABLE_CPPREGIONTEST} PROPERTIES COMPILE_FLAGS ${COM
 set_target_properties(${EXECUTABLE_CPPREGIONTEST}
                       PROPERTIES LINK_FLAGS "${COMMON_LINK_FLAGS}")
 add_custom_target(tests_cpp_region
-                  COMMAND ${EXECUTABLE_CPPREGIONTEST} " 6050"
+                  COMMAND ${EXECUTABLE_CPPREGIONTEST}
                   DEPENDS ${EXECUTABLE_CPPREGIONTEST})
 set_target_properties(${LIB_STATIC_NUPICCORE} PROPERTIES LINK_FLAGS "${COMMON_LINK_FLAGS} -static")
 
