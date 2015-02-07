@@ -41,7 +41,9 @@
 #include <nupic/math/Utils.hpp>
 #include <nupic/ntypes/MemParser.hpp>
 #include <nupic/ntypes/MemStream.hpp>
+#if defined(NTA_SERIALIZATION_ON)
 #include <nupic/proto/SparseMatrixProto.capnp.h>
+#endif
 
 
 //--------------------------------------------------------------------------------
@@ -2792,8 +2794,7 @@ namespace nupic {
         addRow(indb_, indb_it, nzb_, zero_permissive);
       }
 
-#endif
-#ifndef WIN32 // On Unix, MemParser is faster.
+#else // On Unix, MemParser is faster.
 
       MemParser inStream(inStreamParam, totalBytes);
 
@@ -2927,6 +2928,7 @@ namespace nupic {
       return out;
     }
 
+#if defined(NTA_SERIALIZATION_ON)
     /**
      * Write to a Cap'n Proto object.
      */
@@ -2977,6 +2979,7 @@ namespace nupic {
                          rowValues.begin());
       }
     }
+#endif
 
     //--------------------------------------------------------------------------------
     /**

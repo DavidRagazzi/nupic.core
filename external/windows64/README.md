@@ -109,4 +109,3 @@ To rebuild NuPIC Core itself using CMake-GUI application, the following settings
 | Binaries | $NUPIC_CORE/build/scripts |
 | CMAKE_INSTALL_PREFIX | $NUPIC_CORE/build/release |
 
-

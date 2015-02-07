@@ -20,7 +20,7 @@
 
 /* GENERATED FILE WARNING!  DO NOT EDIT apr.h
  *
- * You must modify apr.hwc instead.
+ * You must modify apr.hw instead.
  *
  * And please, make an effort to stub apr.hnw and apr.h.in in the process.
  *
@@ -81,7 +81,10 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 #ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0600
+
+/* Restrict the server to a subset of Windows XP header files by default
+ */
+#define _WIN32_WINNT 0x0501
 #endif
 #ifndef NOUSER
 #define NOUSER
@@ -279,7 +282,7 @@ extern "C" {
 #define APR_HAVE_IN_ADDR        1
 #define APR_HAVE_INET_ADDR      1
 #define APR_HAVE_INET_NETWORK   0
-#define APR_HAVE_IPV6           1
+#define APR_HAVE_IPV6           0
 #define APR_HAVE_MEMMOVE        1
 #define APR_HAVE_SETRLIMIT      0
 #define APR_HAVE_SIGACTION      0
@@ -343,7 +346,7 @@ extern "C" {
 /* If we have a TCP implementation that can be "corked", what flag
  * do we use?
  */
-#define APR_TCP_NOPUSH_FLAG       
+#define APR_TCP_NOPUSH_FLAG       @apr_tcp_nopush_flag@
 
 /* Is the TCP_NODELAY socket option inherited from listening sockets?
  */
