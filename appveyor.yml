@@ -77,7 +77,7 @@ configuration: Release
 before_build:
   - cd C:\projects\nupic-core\build\scripts
   - if "%COMPILER_FAMILY%" == "GNU" cmake C:\projects\nupic-core\src -G "MSYS Makefiles"
-  - if "%COMPILER_FAMILY%" == "MSVC" cmake C:\projects\nupic-core\src -G "Visual Studio 14" -DCMAKE_INSTALL_PREFIX=..\Release -DLIB_STATIC_APR1_LOC=..\..\external\windows64\lib\apr-1.lib -DLIB_STATIC_APRUTIL1_LOC=..\..\external\windows64\lib\aprutil-1.lib -DLIB_STATIC_YAML_CPP_LOC=..\..\external\windows64\lib\yaml-cpp.lib -DLIB_STATIC_YAML_LOC=..\..\external\windows64\lib\yaml.lib -DLIB_STATIC_Z_LOC=..\..\external\windows64\lib\z.lib
+  - if "%COMPILER_FAMILY%" == "MSVC" cmake C:\projects\nupic-core\src -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=..\Release -DLIB_STATIC_APR1_LOC=..\..\external\windows64\lib\apr-1.lib -DLIB_STATIC_APRUTIL1_LOC=..\..\external\windows64\lib\aprutil-1.lib -DLIB_STATIC_YAML_CPP_LOC=..\..\external\windows64\lib\yaml-cpp.lib -DLIB_STATIC_YAML_LOC=..\..\external\windows64\lib\yaml.lib -DLIB_STATIC_Z_LOC=..\..\external\windows64\lib\z.lib
 
 # To run your custom scripts instead of automatic MSBuild
 build_script:
