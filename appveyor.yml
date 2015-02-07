@@ -53,7 +53,7 @@ matrix:
 
 # scripts that run after cloning repository
 install:
-  - choco install cmake -Version 3.1.1
+  - choco install cmake -Version 3.1.0
   - echo %PATH%
   - mkdir C:\projects\nupic-core\build\
   - mkdir C:\projects\nupic-core\build\scripts
