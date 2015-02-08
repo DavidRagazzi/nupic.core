@@ -160,7 +160,7 @@ vector<Synapse> Connections::synapsesForSegment(const Segment& segment)
 
   if (segmentData.destroyed)
   {
-    throw runtime_error("Attempting to access destroyed segment's synapses.");
+    NTA_THROW << "Attempting to access destroyed segment's synapses.";
   }
 
   for (SynapseIdx i = 0; i < segmentData.synapses.size(); i++)

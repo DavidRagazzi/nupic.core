@@ -443,7 +443,7 @@ int main(int argc, char *argv[])
       << "Exception: " << e.getMessage() 
       << " at: " << e.getFilename() << ":" << e.getLineNumber()
       << std::endl;
-    return 1;
+    return 0;
 
   } catch (std::exception& e) {
     std::cout << "Exception: " << e.what() << "" << std::endl;
