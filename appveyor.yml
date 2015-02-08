@@ -53,12 +53,15 @@ matrix:
 
 # scripts that run after cloning repository
 install:
-  - choco install cmake -Version 3.1.1
-  - echo %PATH%
   - mkdir C:\projects\nupic-core\build\
   - mkdir C:\projects\nupic-core\build\scripts
   - mkdir C:\projects\nupic-core\build\release
   - cd C:\projects\nupic-core\build\scripts
+  - ps: Start-FileDownload 'cmake-3.1.0-win32-x86.zip'
+  - ps: Write-Host '7z x cmake-3.1.0-win32-x86.zip'
+  - ps: Start-Process -FilePath "7z" -ArgumentList "x -y cmake-3.1.0-win32-x86.zip" -Wait -Passthru
+  - set PATH=C:\projects\nupic-core\build\scripts\cmake-3.1.0-win32-x86\bin;%PATH%
+  - echo %PATH%
 
 # enable patching of AssemblyInfo.* files
 assembly_info:
