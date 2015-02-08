@@ -53,6 +53,7 @@ matrix:
 
 # scripts that run after cloning repository
 install:
+  - set PATH="C:\Program Files (x86)\MSBuild\14.0\Bin";%PATH%
   - mkdir C:\projects\nupic-core\build\
   - mkdir C:\projects\nupic-core\build\scripts
   - mkdir C:\projects\nupic-core\build\release
