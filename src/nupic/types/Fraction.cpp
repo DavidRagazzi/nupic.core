@@ -27,7 +27,6 @@
 #include <cstdlib> //abs!
 
 #include <nupic/types/Fraction.hpp>
-#include <nupic/utils/Log.hpp>
 #include <nupic/types/Exception.hpp>
 
 namespace nupic
@@ -38,14 +37,19 @@ namespace nupic
   {
     if (_denominator == 0)
     {
-      NTA_THROW << "Fraction - attempt to create with invalid zero valued denominator";
+      throw Exception(__FILE__,
+                      __LINE__,
+                      "Fraction - attempt to create with invalid zero valued "
+                      "denominator");
     }
 
     //can't use abs() because abs(std::numeric_limits<int>::min()) == -2^31
     if ((numerator_ > overflowCutoff) || (numerator_ < -overflowCutoff) || 
        (denominator_ > overflowCutoff) || (denominator_ < -overflowCutoff))
     {
-      NTA_THROW << "Fraction - integer overflow.";
+      throw Exception(__FILE__,
+		      __LINE__,
+		      "Fraction - integer overflow.");
     }
   }
 
@@ -56,7 +60,9 @@ namespace nupic
     //can't use abs() because abs(std::numeric_limits<int>::min()) == -2^31
     if ((numerator_ > overflowCutoff) || (numerator_ < -overflowCutoff))
     {
-      NTA_THROW << "Fraction - integer overflow.";
+      throw Exception(__FILE__,
+		      __LINE__,
+		      "Fraction - integer overflow.");
     }
   }
 
@@ -90,7 +96,10 @@ namespace nupic
   {
     if(_denominator == 0)
     {
-      NTA_THROW << "Fraction - attempt to set an invalid zero valued denominator";
+      throw Exception(__FILE__,
+                      __LINE__,
+                      "Fraction - attempt to set an invalid zero valued "
+                      "denominator");
     }
     denominator_ = _denominator;
   }
@@ -101,7 +110,10 @@ namespace nupic
     denominator_ = _denominator;
     if(_denominator == 0)
     {
-      NTA_THROW << "Fraction - attempt to set an invalid zero valued denominator";
+      throw Exception(__FILE__,
+                      __LINE__,
+                      "Fraction - attempt to set an invalid zero valued "
+                      "denominator");
     }
   }
 
@@ -194,7 +206,9 @@ namespace nupic
   {
     if(rhs.numerator_ == 0)
     {
-      NTA_THROW << "Fraction - division by zero error";
+      throw Exception(__FILE__,
+                      __LINE__,
+                      "Fraction - division by zero error");
     }
 
     return Fraction(lhs.numerator_ * rhs.denominator_,
@@ -227,7 +241,9 @@ namespace nupic
     // a/b % c/d = (ad % bc) / bc. gives output with same sign as a/b
     if(rhs.numerator_ == 0)
     {
-      NTA_THROW << "Fraction - division by zero error";
+      throw Exception(__FILE__,
+                      __LINE__,
+                      "Fraction - division by zero error");
       return Fraction(0,1);
     }
 
@@ -327,11 +343,15 @@ namespace nupic
     //use arbitrary cutoff for integer values set in Fraction.hpp
     if(std::abs(value) > overflowCutoff)
     {
-      NTA_THROW << "Fraction - integer overflow for abritrary cutoff.";
+      throw Exception(__FILE__,
+		      __LINE__,
+		      "Fraction - integer overflow for abritrary cutoff.");
     }
     else if((std::fabs(value) < 1.0/overflowCutoff) && (std::fabs(value) > 0))
     {
-      NTA_THROW << "Fraction - integer underflow for arbitrary cutoff.";
+      throw Exception(__FILE__,
+		      __LINE__,
+		      "Fraction - integer underflow for arbitrary cutoff.");
     }
   
     do {
