@@ -87,10 +87,12 @@ build_script:
 # scripts to run after build
 after_build:
   - cd C:\projects\nupic-core\build\release\bin
-  - cpp_region_test 1 1>cpp_region_log.txt 2>&1
-  - type cpp_region.log
-  - unit_tests 1>unit_tests_log.txt 2>&1
-  - type unit_tests_log.log
+  - cpp_region_test 1 2>&1
+  - unit_tests --gtest_output=xml:${PROJECT_BUILD_ARTIFACTS_DIR}/unit_tests_report.xml 2>&1
+#  - cpp_region_test 1 1>cpp_region_log.txt 2>&1
+#  - type cpp_region_log.txt
+#  - unit_tests 1>unit_tests_log.txt 2>&1
+#  - type unit_tests_log.txt
   - cd C:\projects\nupic-core\build\release\
   - copy C:\projects\nupic-core\Package.nuspec .
   - nuget pack -version %APPVEYOR_BUILD_VERSION%
