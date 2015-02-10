@@ -210,6 +210,12 @@ endif()
 set(COMMON_COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} ${OPTIMIZATION_FLAGS_CC}")
 set(COMMON_LINK_FLAGS "${COMMON_LINK_FLAGS} ${OPTIMIZATION_FLAGS_LT}")
 
+if(WIN32) # incl. win64
+  set(IO_REDIRECT " 1>log.txt 2>&1")
+else()
+  set(IO_REDIRECT "")
+endif()
+
 
 #
 # Let CMake know where all of the external files are.
@@ -441,7 +447,7 @@ set_target_properties(${EXECUTABLE_CPPREGIONTEST} PROPERTIES COMPILE_FLAGS ${COM
 set_target_properties(${EXECUTABLE_CPPREGIONTEST}
                       PROPERTIES LINK_FLAGS "${COMMON_LINK_FLAGS}")
 add_custom_target(tests_cpp_region
-                  COMMAND ${EXECUTABLE_CPPREGIONTEST} 1 1>log.txt 2>&1
+                  COMMAND ${EXECUTABLE_CPPREGIONTEST} 1 ${IO_REDIRECT}
                   DEPENDS ${EXECUTABLE_CPPREGIONTEST})
 set_target_properties(${LIB_STATIC_NUPICCORE} PROPERTIES LINK_FLAGS "${COMMON_LINK_FLAGS} -static")
 
@@ -535,7 +541,7 @@ set_target_properties(${EXECUTABLE_GTESTS}
                                  LINK_FLAGS "${COMMON_LINK_FLAGS}")
 add_dependencies(${EXECUTABLE_GTESTS} ${LIB_STATIC_GTEST} ${COMMON_LIBS})
 add_custom_target(tests_unit
-                  COMMAND ${EXECUTABLE_GTESTS} "--gtest_output=xml:${PROJECT_BUILD_ARTIFACTS_DIR}/unit_tests_report.xml 2>&1")
+                  COMMAND ${EXECUTABLE_GTESTS} "--gtest_output=xml:${PROJECT_BUILD_ARTIFACTS_DIR}/unit_tests_report.xml" ${IO_REDIRECT})
 set(TEST_HEADERS
     test/unit/algorithms/CondProbTableTest.hpp
     test/unit/algorithms/ConnectionsTest.hpp
