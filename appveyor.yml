@@ -42,15 +42,6 @@ environment:
     - COMPILER_FAMILY: MSVC
       DEPLOY_BUILD: 1
 
-matrix:
-  fast_finish: true
-#  allow_failures:
-#    - platform: x86
-#      configuration: Debug
-#    - platform: x64
-#      configuration: Debug
-
-
 # scripts that run after cloning repository
 install:
   - set PATH="C:\Program Files (x86)\MSBuild\14.0\Bin";%PATH%
@@ -81,20 +72,17 @@ configuration: Release
 # scripts to run before build
 before_build:
   - cd C:\projects\nupic-core\build\scripts
-  - if "%COMPILER_FAMILY%" == "GNU" cmake C:\projects\nupic-core\src -G "MSYS Makefiles"
-  - if "%COMPILER_FAMILY%" == "MSVC" cmake C:\projects\nupic-core\src -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=..\Release -DLIB_STATIC_APR1_LOC=..\..\external\windows64\lib\apr-1.lib -DLIB_STATIC_APRUTIL1_LOC=..\..\external\windows64\lib\aprutil-1.lib -DLIB_STATIC_YAML_CPP_LOC=..\..\external\windows64\lib\yaml-cpp.lib -DLIB_STATIC_YAML_LOC=..\..\external\windows64\lib\yaml.lib -DLIB_STATIC_Z_LOC=..\..\external\windows64\lib\z.lib
+  - cmake C:\projects\nupic-core\src -G "Visual Studio 14 2015 Win64" -DCMAKE_INSTALL_PREFIX=..\Release -DLIB_STATIC_APR1_LOC=..\..\external\windows64\lib\apr-1.lib -DLIB_STATIC_APRUTIL1_LOC=..\..\external\windows64\lib\aprutil-1.lib -DLIB_STATIC_YAML_CPP_LOC=..\..\external\windows64\lib\yaml-cpp.lib -DLIB_STATIC_YAML_LOC=..\..\external\windows64\lib\yaml.lib -DLIB_STATIC_Z_LOC=..\..\external\windows64\lib\z.lib
 
 # To run your custom scripts instead of automatic MSBuild
 build_script:
-  - if "%COMPILER_FAMILY%" == "GNU" make
-  - if "%COMPILER_FAMILY%" == "GNU" make install
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\gtest.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\nupic_core_solo.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\cpp_region_test.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\helloregion.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\tests_cpp_region.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\unit_tests.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - if "%COMPILER_FAMILY%" == "MSVC" msbuild "C:\projects\nupic-core\build\scripts\Install.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\gtest.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\nupic_core_solo.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\cpp_region_test.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\helloregion.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\tests_cpp_region.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\unit_tests.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - ps: msbuild "C:\projects\nupic-core\build\scripts\Install.vcxproj" /p:Configuration=%configuration% /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 # scripts to run after build
 after_build:
