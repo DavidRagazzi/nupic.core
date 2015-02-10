@@ -2580,7 +2580,7 @@ namespace nupic {
     sp1.save(outfile);
     outfile.close();
 
-    ifstream infile (filename);
+    ifstream infile(filename);
     sp2.load(infile);
     infile.close();
 
@@ -2598,11 +2598,11 @@ namespace nupic {
     UInt numColumns = 12;
     setup(sp1, numInputs, numColumns);
 
-    ofstream os(filename);
+    ofstream os(filename, ios::binary);
     sp1.write(os);
     os.close();
 
-    ifstream is(filename);
+    ifstream is(filename, ios::binary);
     sp2.read(is);
     is.close();
 
