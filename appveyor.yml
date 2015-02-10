@@ -44,7 +44,6 @@ environment:
 
 # scripts that run after cloning repository
 install:
-  - set PATH="C:\Program Files (x86)\MSBuild\14.0\Bin";%PATH%
   - mkdir C:\projects\nupic-core\build\
   - mkdir C:\projects\nupic-core\build\scripts
   - mkdir C:\projects\nupic-core\build\release
@@ -52,7 +51,8 @@ install:
   - ps: Start-FileDownload 'http://www.cmake.org/files/v3.1/cmake-3.1.0-win32-x86.zip'
   - ps: Write-Host '7z x cmake-3.1.0-win32-x86.zip'
   - ps: Start-Process -FilePath "7z" -ArgumentList "x -y cmake-3.1.0-win32-x86.zip" -Wait -Passthru
-  - set PATH=C:\projects\nupic-core\build\scripts\cmake-3.1.0-win32-x86\bin;%PATH%
+  - set PATH="C:\projects\nupic-core\build\scripts\cmake-3.1.0-win32-x86\bin";%PATH%
+  - set PATH="C:\Program Files (x86)\MSBuild\14.0\Bin";%PATH%
   - echo %PATH%
 
 # enable patching of AssemblyInfo.* files
@@ -86,6 +86,13 @@ build_script:
 
 # scripts to run after build
 after_build:
+  - cd C:\projects\nupic-core\build\release\bin
+  - helloregion 1>helloregion_log.txt 2>&1
+  - type helloregion.log
+  - cpp_region_test 1 1>cpp_region_log.txt 2>&1
+  - type cpp_region.log
+  - unit_tests 1>unit_tests_log.txt 2>&1
+  - type unit_tests_log.log
   - cd C:\projects\nupic-core\build\release\
   - copy C:\projects\nupic-core\Package.nuspec .
   - nuget pack -version %APPVEYOR_BUILD_VERSION%
