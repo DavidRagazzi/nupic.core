@@ -96,7 +96,7 @@ elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
                   -DCAPNP_LITE=1
                   -D_VARIADIC_MAX=10
                   -DNOMINMAX)
-  set(SERIALIZATION OFF)
+  set(SERIALIZATION ON)
 endif()
 
 

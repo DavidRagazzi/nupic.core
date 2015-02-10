@@ -40,7 +40,7 @@ environment:
 #    - COMPILER_FAMILY: GNU
 #      DEPLOY_BUILD: 0
     - COMPILER_FAMILY: MSVC
-      DEPLOY_BUILD: 1
+      DEPLOY_BUILD: 0
 
 # scripts that run after cloning repository
 install:
@@ -78,14 +78,17 @@ before_build:
 build_script:
   - msbuild "C:\projects\nupic-core\build\scripts\gtest.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\nupic_core_solo.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - msbuild "C:\projects\nupic-core\build\scripts\cpp_region_test.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\helloregion.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - msbuild "C:\projects\nupic-core\build\scripts\prototest.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - msbuild "C:\projects\nupic-core\build\scripts\py_region_test.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - msbuild "C:\projects\nupic-core\build\scripts\cpp_region_test.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\unit_tests.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\Install.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 # scripts to run after build
 after_build:
   - cd C:\projects\nupic-core\build\release\bin
+  - prototest 2>&1
   - cpp_region_test 1 2>&1
   - unit_tests --gtest_output=xml:${PROJECT_BUILD_ARTIFACTS_DIR}/unit_tests_report.xml 2>&1
   - cd C:\projects\nupic-core\build\release\
