@@ -80,7 +80,6 @@ build_script:
   - msbuild "C:\projects\nupic-core\build\scripts\nupic_core_solo.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\cpp_region_test.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\helloregion.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-  - msbuild "C:\projects\nupic-core\build\scripts\tests_cpp_region.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\unit_tests.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
   - msbuild "C:\projects\nupic-core\build\scripts\Install.vcxproj" /p:Configuration=Release /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
@@ -89,10 +88,6 @@ after_build:
   - cd C:\projects\nupic-core\build\release\bin
   - cpp_region_test 1 2>&1
   - unit_tests --gtest_output=xml:${PROJECT_BUILD_ARTIFACTS_DIR}/unit_tests_report.xml 2>&1
-#  - cpp_region_test 1 1>cpp_region_log.txt 2>&1
-#  - type cpp_region_log.txt
-#  - unit_tests 1>unit_tests_log.txt 2>&1
-#  - type unit_tests_log.txt
   - cd C:\projects\nupic-core\build\release\
   - copy C:\projects\nupic-core\Package.nuspec .
   - nuget pack -version %APPVEYOR_BUILD_VERSION%
