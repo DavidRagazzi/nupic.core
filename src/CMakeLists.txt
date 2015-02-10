@@ -93,6 +93,7 @@ elseif(${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
   set(SERIALIZATION ON)
 elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
   add_definitions(-DNTA_COMPILER_MSVC
+                  -DNTA_SERIALIZATION_ON
                   -DCAPNP_LITE=1
                   -D_VARIADIC_MAX=10
                   -DNOMINMAX)
