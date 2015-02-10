@@ -370,13 +370,15 @@ int main(int argc, char *argv[])
 
   // TODO: real argument parsing
   // Optional arg is number of iterations to do. 
-  NTA_CHECK(argc == 1 || argc == 2);
+  //NTA_CHECK(argc == 1 || argc == 2);
   size_t count = 1;
-  if (argc == 2)
+  if (argc >= 2)
   {
     std::stringstream ss(argv[1]);
     ss >> count;
   }
+  count = 1;
+
   // Start checking memory usage after this many iterations. 
 #if defined(NTA_OS_WINDOWS)
   // takes longer to settle down on win32
