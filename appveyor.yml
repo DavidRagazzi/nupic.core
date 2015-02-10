@@ -87,8 +87,6 @@ build_script:
 # scripts to run after build
 after_build:
   - cd C:\projects\nupic-core\build\release\bin
-  - helloregion 1>helloregion_log.txt 2>&1
-  - type helloregion.log
   - cpp_region_test 1 1>cpp_region_log.txt 2>&1
   - type cpp_region.log
   - unit_tests 1>unit_tests_log.txt 2>&1
