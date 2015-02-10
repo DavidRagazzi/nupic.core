@@ -52,7 +52,7 @@ bool ignore_negative_tests = false;
       bool caughtException = false; \
       try { \
         statement; \
-      } catch(std::exception& ) { \
+      } catch(nupic::Exception& ) { \
         caughtException = true; \
         std::cout << "Caught exception as expected: " # statement "" << std::endl;  \
       } \
